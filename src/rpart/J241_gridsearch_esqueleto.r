@@ -8,7 +8,7 @@ require("data.table")
 require("rpart")
 require("parallel")
 
-ksemillas  <- c(102191, 200177, 410551, 552581, 892237) #reemplazar por las propias semillas
+ksemillas  <- c(123997, 107971, 111997, 221987 , 334991) #reemplazar por las propias semillas
 
 #------------------------------------------------------------------------------
 #particionar agrega una columna llamada fold a un dataset que consiste en una particion estratificada segun agrupa
@@ -28,7 +28,7 @@ particionar  <- function( data,  division, agrupa="",  campo="fold", start=1, se
 ArbolEstimarGanancia  <- function( semilla, param_basicos )
 {
   #particiono estratificadamente el dataset
-  particionar( dataset, division=c(70,30), agrupa="clase_ternaria", seed= semilla )  #Cambiar por la primer semilla de cada uno !
+  particionar( dataset, division=c(70,30), agrupa="clase_ternaria", seed= 123997 )  #Cambiar por la primer semilla de cada uno !
 
   #genero el modelo
   modelo  <- rpart("clase_ternaria ~ .",     #quiero predecir clase_ternaria a partir del resto
@@ -74,7 +74,7 @@ ArbolesMontecarlo  <- function( semillas, param_basicos )
 #------------------------------------------------------------------------------
 
 #Aqui se debe poner la carpeta de la computadora local
-setwd("D:\\gdrive\\ITBA2022A\\")   #Establezco el Working Directory
+setwd("C:\\Users\\JLeiva\\Downloads\\Mineria de datos")   #Establezco el Working Directory
 
 #cargo los datos
 dataset  <- fread("./datasets/paquete_premium_202011.csv")
@@ -99,15 +99,19 @@ cat( file=archivo_salida,
 
 #itero por los loops anidados para cada hiperparametro
 
-for( vmax_depth  in  c( 4, 6, 8, 10, 12, 14 )  )
+for( vmax_depth  in  c(4, 6, 8, 10, 12, 14, 16)  )
 {
-for( vmin_split  in  c( 1000, 800, 600, 400, 200, 100, 50, 20, 10 )  )
+  for( vmin_split  in  c(1000, 800, 600, 400, 200, 100, 50, 20, 10 ))  
 {
+  for( minbucket  in  c(1,2,3,4,5,6,7,8)  )
+  {
+    for( cp  in  c( -1)  )
+    {
 
   #notar como se agrega
-  param_basicos  <- list( "cp"=         -0.5,       #complejidad minima
+  param_basicos  <- list( "cp"=         cp,       #complejidad minima
                           "minsplit"=  vmin_split,  #minima cantidad de registros en un nodo para hacer el split
-                          "minbucket"=  5,          #minima cantidad de registros en una hoja
+                          "minbucket"=  minbucket,          #minima cantidad de registros en una hoja
                           "maxdepth"=  vmax_depth ) #profundidad máxima del arbol
 
   #Un solo llamado, con la semilla 17
@@ -121,5 +125,7 @@ for( vmin_split  in  c( 1000, 800, 600, 400, 200, 100, 50, 20, 10 )  )
         vmin_split, "\t",
         ganancia_promedio, "\n"  )
 
+    }
+  }
 }
 }
