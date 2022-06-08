@@ -258,7 +258,7 @@ AgregarVariables  <- function( dataset )
   dataset[ , mvr_relacionsaldomaster         := Visa_msaldototal / mv_mconsumototal ]
   dataset[ , mvr_relacionconsumovisa         := mtarjeta_visa_consumo  / mv_mconsumototal ]
   dataset[ , mvr_relacionconsumomaster       := mtarjeta_master_consumo   / mv_mconsumototal ]
-  dataset[ , mvr_relacionconsumoprestamos    := mv_prestamos_personales  / mv_mconsumototal ]
+  dataset[ , mvr_relacionconsumoprestamos    := mprestamos_personales  / mv_mconsumototal ]
   
   #valvula de seguridad para evitar valores infinitos
   #paso los infinitos a NULOS
