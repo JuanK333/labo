@@ -48,9 +48,9 @@ param:
     seed: 999983                     #podrian poner su propia semilla, asi sienten que la corrida les pertenece
     extra_trees: FALSE
 
-    drop_rate:                     [ 0.03,   1.0]  solo cuando  boosting: dart
-    max_drop:                      [ 10  , 500]    solo cuando  boosting: dart
-    skip_drop:                     [ 0.2 ,   0.8]  solo cuando  boosting: dart
+    drop_rate:                     [ 0.03,   1.0]  
+    max_drop:                      [ 10  , 500]    
+    skip_drop:                     [ 0.2 ,   0.8]  
 
     metric: "custom"                 #no tocar
     first_metric_only: TRUE          #no tocar
