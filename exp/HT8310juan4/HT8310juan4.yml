@@ -49,8 +49,8 @@ param:
     extra_trees: FALSE
 
     drop_rate:                     [ 0.03,   1.0]  
-    max_drop:                      [ 10  , 500, "integer"]    
-    skip_drop:                     [ 0.2 ,   0.8, "integer"]  
+    max_drop:                      [ 10  , 100, "integer"]    
+    skip_drop:                     [ 0.2 ,   0.8]  
 
     metric: "custom"                 #no tocar
     first_metric_only: TRUE          #no tocar
